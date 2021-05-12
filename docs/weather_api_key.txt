@@ -1,0 +1,3 @@
+ecfe380e7ea08e260b131e5b4ea9e24c
+
+https://api.openweathermap.org/data/2.5/weather?q=tokyo&appid=ecfe380e7ea08e260b131e5b4ea9e24c&units=metric&lang=fr
