@@ -1,10 +1,10 @@
 <template>
     <div>
         <h1>{{ city }}</h1>
-        <br>
+        <br>        
+        <h2>Température {{ temp }}</h2> 
+        <h2>Ressenti {{ ressenti }}</h2> 
         <h2>{{ descr }}</h2>
-        <h2>{{ temp }}</h2>
-        
         <img :src="icon_url" alt="">
         
     </div>
@@ -25,10 +25,18 @@ export default {
     data(){
         return {
             city:"",
-            ville_meteo: "",
+            ville_meteo: "", // pour l'URL
             temp: "",
+            ressenti: "", // to do...
             descr: "",
             icon_url: "",
+            vent_vit: "",   // to do...
+            vent_dir: "",   // to do...
+            time_zone: "", // ex: -5  to do...
+            pluie: "",  // to do...
+            neige: "",  // to do...
+            coucher: "",    // to do...
+            lever: "",  // to do...
         }
     },
     methods: {
@@ -49,6 +57,7 @@ export default {
                 //this.meteo_info = json;
                 console.log(json)
                 this.temp = Math.round(json.main.temp) + "°C"
+                this.ressenti = Math.round(json.main.feels_like) + "°C"
                 this.descr = json.weather[0].description
                 //this.meteo_info = JSON.stringify(json, null, ' ');
                 // document.body.innerHTML += `<pre>${meteo_info}</pre>`;
