@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Test Title</h1>
+        <h1>Météo par Ville</h1>
         <form @submit="submit" name="city_search" action="#" method="POST">
             <input type="text" 
                    name="city" 

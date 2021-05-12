@@ -2,9 +2,10 @@
     <div>
         <h1>{{ city }}</h1>
         <br>
-        <h2>{{ meteo_info.weather[0].description }}</h2>
-        <h2>{{ meteo_info.main.temp}}</h2>
+        <h2>{{ descr }}</h2>
+        <h2>{{ temp }}</h2>
         
+        <img :src="icon_url" alt="">
         
     </div>
 </template>
@@ -25,7 +26,9 @@ export default {
         return {
             city:"",
             ville_meteo: "",
-            meteo_info: "",
+            temp: "",
+            descr: "",
+            icon_url: "",
         }
     },
     methods: {
@@ -43,10 +46,13 @@ export default {
             fetch(this.ville_meteo, options).then(data => {
                 return data.json();
             }).then(json => {
-                this.meteo_info = json;
+                //this.meteo_info = json;
                 console.log(json)
+                this.temp = Math.round(json.main.temp) + "°C"
+                this.descr = json.weather[0].description
                 //this.meteo_info = JSON.stringify(json, null, ' ');
                 // document.body.innerHTML += `<pre>${meteo_info}</pre>`;
+                this.icon_url = " http://openweathermap.org/img/wn/" + json.weather[0].icon + "@2x.png"
             })
         },
 
