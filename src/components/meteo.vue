@@ -8,7 +8,16 @@
         <img :src="icon_url" alt="">
         <h2>Force du vent  {{ vent_vit }}</h2> 
         <h2>Direction du vent  {{ vent_dir }}</h2> 
-        <h2>Fuseau horraire   {{ time_zone }} (heure de Montreal)</h2> 
+        <h2>Fuseau horraire   {{ time_zone }} (base: heure de Montreal)</h2> 
+        <h2>Pluie:   {{ pluie }} </h2> 
+        <h2>Neige:   {{ neige }} </h2> 
+        <h2>Soleil hre de coucher:   {{ coucher }} </h2> 
+        <h2>Soleil hre de lever:   {{ lever }} </h2>  
+
+        <br>
+        <br>
+        <br>
+        <button @submit="submit" type="submit" value="">Retour</button>
         
     </div>
 </template>
@@ -27,15 +36,16 @@
 export default {
     data(){
         return {
+            retour: "",
             city:"",
             ville_meteo: "", // pour l'URL
             temp: "",
-            ressenti: "", // to do...
+            ressenti: "",
             descr: "",
             icon_url: "",
-            vent_vit: "",   // to do...
+            vent_vit: "",  
             vent_dir: "",   // to do...
-            time_zone: "", // ex: -5  to do...
+            time_zone: "", 
             pluie: "",  // to do...
             neige: "",  // to do...
             coucher: "",    // to do...
@@ -66,10 +76,19 @@ export default {
                 this.vent_vit = ((json.wind.speed * 3600) / 1000) + " km/h"
                 this.vent_dir = json.wind.deg + " <--- to do..."
                 this.time_zone = ((json.timezone / 3600) + 4)
-
+                this.pluie = json.rain  //Je ne trouves pas rain.1h dans l'objet comme ds la doc
+                this.neige = json.snow  //Je ne trouves pas snow.1h dans l'objet comme ds la doc
+                this.coucher = json.sys.sunset
+                this.lever = json.sys.sunrise
             })
         },
 
+        submit(e){
+            e.preventDefault();
+            this.$router.push({
+                path: "/",
+            });
+        },
    
     },      // FIN METHODS
 
@@ -83,5 +102,9 @@ export default {
 </script>
 
 <style scoped>
-
+button {
+    height: 50px;
+    width: 180px;
+    font-size: 30px;
+}
 </style>
