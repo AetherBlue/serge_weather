@@ -6,6 +6,9 @@
         <h2>Ressenti {{ ressenti }}</h2> 
         <h2>{{ descr }}</h2>
         <img :src="icon_url" alt="">
+        <h2>Force du vent  {{ vent_vit }}</h2> 
+        <h2>Direction du vent  {{ vent_dir }}</h2> 
+        <h2>Fuseau horraire   {{ time_zone }} (heure de Montreal)</h2> 
         
     </div>
 </template>
@@ -59,9 +62,11 @@ export default {
                 this.temp = Math.round(json.main.temp) + "°C"
                 this.ressenti = Math.round(json.main.feels_like) + "°C"
                 this.descr = json.weather[0].description
-                //this.meteo_info = JSON.stringify(json, null, ' ');
-                // document.body.innerHTML += `<pre>${meteo_info}</pre>`;
                 this.icon_url = " http://openweathermap.org/img/wn/" + json.weather[0].icon + "@2x.png"
+                this.vent_vit = ((json.wind.speed * 3600) / 1000) + " km/h"
+                this.vent_dir = json.wind.deg + " <--- to do..."
+                this.time_zone = ((json.timezone / 3600) + 4)
+
             })
         },
 
