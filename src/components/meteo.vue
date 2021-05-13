@@ -78,8 +78,9 @@ export default {
                 this.time_zone = ((json.timezone / 3600) + 4)
                 this.pluie = json.rain  //Je ne trouves pas rain.1h dans l'objet comme ds la doc
                 this.neige = json.snow  //Je ne trouves pas snow.1h dans l'objet comme ds la doc
-                this.coucher = json.sys.sunset
-                this.lever = json.sys.sunrise
+                this.coucher = new Date(json.sys.sunset * 1000) // Me reste à élaborer pour
+                this.lever = new Date(json.sys.sunrise * 1000)  // plus de lisibilité mais...
+                                                                // ...manque de TEMPS lol            
             })
         },
 
